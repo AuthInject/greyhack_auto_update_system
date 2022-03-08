@@ -1,0 +1,15 @@
+//==========================================================
+autoupdate = include_lib("/lib/aptclient.so")
+if not autoupdate then
+    aptclient = include_lib(current_path + "/aptclient.so")
+end if
+if not autoupdate then exit("Error: Missing <b>apt</b> lib!")
+//==========================================================
+autoupdate.add_repo("[ip]",1542) //add repo address to [sources.txt] located in /etc/apt/ folder
+autoupdate.update //updates added repo address to make the repo address work for updateing libs
+//==========================================================
+autoupdate.check_upgrade("/lib/metaxploit.so") //checks for metaxploit.so update and then updates it
+autoupdate.check_upgrade("/lib/crypto.so") //checks for crypto.so update and then updates it
+//==========================================================
+autoupdate.del_repo("[ip]") //deletes repo address
+//==========================================================
